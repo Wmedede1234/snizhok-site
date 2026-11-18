@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Список бажань на Новий рік — Сніжок</title>
+  <meta name="description" content="Склади список бажань на Новий рік і надішли друзям одним посиланням. Безкоштовно, без реєстрації: список живе в самому посиланні.">
+  <meta name="theme-color" content="#0B1530">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="uk_UA">
+  <meta property="og:url" content="https://wmedede1234.github.io/snizhok-site/wishlist.html">
+  <meta property="og:title" content="Список бажань на Новий рік — склади й надішли друзям">
+  <meta property="og:description" content="Склади список бажань і надішли друзям одним посиланням. Безкоштовно, без реєстрації.">
+  <meta property="og:image" content="https://wmedede1234.github.io/snizhok-site/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Сніжок: сніговик, пінгвін і білочка на заметі під місяцем">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Список бажань на Новий рік — склади й надішли друзям">
+  <meta name="twitter:description" content="Склади список бажань і надішли друзям одним посиланням.">
+  <meta name="twitter:image" content="https://wmedede1234.github.io/snizhok-site/og.jpg">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/nunito-cyr.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/nunito-lat.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tools.css">
+  <script src="config.js"></script>
+  <script src="tools.js" defer></script>
+  <script src="wishlist.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Перейти до вмісту</a>
+
+  <header class="top">
+    <div class="wrap top__in">
+      <a class="logo" href="index.html" aria-label="Сніжок — на головну">
+        <svg class="logo__flake" aria-hidden="true"><use href="#i-snow"/></svg>Сніжок
+      </a>
+      <nav class="nav" aria-label="Розділи">
+        <a href="wishlist.html" aria-current="page">Список бажань</a>
+        <a href="santa.html">Таємний Санта</a>
+        <a href="index.html#download">Завантажити Сніжок</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ РЕДАКТОР ============ -->
+    <div id="wl-editor" hidden>
+      <section class="t-hero">
+        <div class="wrap">
+          <p class="t-kicker">Для свята разом</p>
+          <h1>Список бажань</h1>
+          <p class="t-lead">Запиши, що хочеш отримати на&nbsp;Новий рік, і&nbsp;надішли друзям одне посилання. Без реєстрації та&nbsp;пошти.</p>
+        </div>
+      </section>
+
+      <section class="t-body" aria-label="Редактор списку">
+        <div class="wrap t-grid">
+          <form class="t-panel" id="wl-form" novalidate autocomplete="off">
+            <div class="t-fields">
+              <div class="t-field">
+                <label for="wl-name">Твоє ім'я</label>
+                <input class="input" id="wl-name" maxlength="40" autocomplete="given-name" placeholder="Наприклад: Оля">
+              </div>
+              <div class="t-field">
+                <label for="wl-head">Заголовок <span class="t-opt">необов'язково</span></label>
+                <input class="input" id="wl-head" maxlength="60" placeholder="Мої бажання на Новий рік">
+              </div>
+            </div>
+
+            <h2 class="t-h" id="wl-items-title">Бажання</h2>
+            <p class="t-sub">Назви досить. Посилання, ціна й&nbsp;коментар допоможуть не&nbsp;помилитися з&nbsp;розміром чи&nbsp;кольором.</p>
+            <ol class="t-items" id="wl-items" aria-labelledby="wl-items-title"></ol>
+            <p class="t-empty" id="wl-empty">Поки що порожньо. Додай перше бажання — воно одразу з'явиться на&nbsp;листі праворуч.</p>
+            <button type="button" class="btn btn--ghost t-add" id="wl-add"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg>Додати бажання</button>
+            <p class="t-count" id="wl-count" aria-live="polite"></p>
+          </form>
+
+          <aside class="t-side" aria-label="Попередній перегляд і надсилання">
+            <div class="paper" id="wl-preview"></div>
+
+            <div class="t-panel" id="wl-share">
+              <h2 class="t-h">Надіслати друзям</h2>
+              <p class="t-sub" id="wl-share-hint">Додай хоча&nbsp;б одне бажання — і&nbsp;з'явиться посилання.</p>
+              <div class="t-share__btns">
+                <button type="button" class="btn btn--cta" id="wl-copy" aria-disabled="true"><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>Скопіювати посилання</button>
+                <a class="btn btn--ghost" id="wl-tg" href="#" target="_blank" rel="noopener" aria-disabled="true"><svg class="ico" aria-hidden="true"><use href="#i-send"/></svg>У&nbsp;Telegram</a>
+                <a class="btn btn--ghost" id="wl-viber" href="#" rel="noopener" aria-disabled="true"><svg class="ico" aria-hidden="true"><use href="#i-send"/></svg>Viber</a>
+                <button type="button" class="btn btn--ghost" id="wl-native" hidden><svg class="ico" aria-hidden="true"><use href="#i-share"/></svg>Поділитися</button>
+              </div>
+              <button type="button" class="btn btn--cta t-back" id="wl-back" hidden aria-disabled="true"><svg class="ico" aria-hidden="true"><use href="#i-gift"/></svg>Додати до Таємного Санти й повернутися</button>
+              <div class="t-link t-field">
+                <label class="t-mini" for="wl-link">Посилання на&nbsp;твій список</label>
+                <input class="input" id="wl-link" readonly value="" placeholder="з'явиться після першого бажання">
+              </div>
+              <ul class="t-notes">
+                <li><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg><span>Список зберігається лише у&nbsp;твоєму браузері та&nbsp;в&nbsp;самому посиланні. Сервера немає — ми&nbsp;його не&nbsp;бачимо.</span></li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-info"/></svg><span>Посилання стиснене, але не&nbsp;зашифроване: хто його має, бачить увесь список. Діліться ним із&nbsp;тими, кому довіряєте.</span></li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-info"/></svg><span>Змінив список — надішли друзям нове посилання: старе покаже попередню версію.</span></li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ ПЕРЕГЛЯД ЧУЖОГО СПИСКУ ============ -->
+    <section class="t-body" id="wl-view" hidden aria-labelledby="wl-view-title">
+      <div class="wrap t-view">
+        <div class="paper" id="wl-view-paper"></div>
+        <div class="t-view__side">
+          <p class="t-kicker">Список бажань</p>
+          <h1 id="wl-view-title"></h1>
+          <p id="wl-view-lead"></p>
+          <ul class="t-notes">
+            <li><svg class="ico" aria-hidden="true"><use href="#i-info"/></svg><span>Позначки «Я&nbsp;подарую» бачиш лише&nbsp;ти, у&nbsp;цьому браузері. Домовся з&nbsp;іншими, щоб не&nbsp;подарувати те&nbsp;саме.</span></li>
+          </ul>
+          <div class="t-share__btns">
+            <a class="btn btn--cta" href="wishlist.html" id="wl-own"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg>Скласти свій список</a>
+            <a class="btn btn--ghost" href="santa.html"><svg class="ico" aria-hidden="true"><use href="#i-gift"/></svg>Таємний Санта</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ПОШКОДЖЕНЕ ПОСИЛАННЯ ============ -->
+    <section class="wrap t-state" id="wl-bad" hidden>
+      <h1>Посилання пошкоджене</h1>
+      <p>Схоже, воно обрізалося під час копіювання. Попроси надіслати нове — або склади власний список.</p>
+      <div class="t-state__btns">
+        <a class="btn btn--cta" href="index.html">На головну</a>
+        <a class="btn btn--ghost" href="wishlist.html">Скласти свій список</a>
+      </div>
+    </section>
+
+    <!-- ============ ЩЕ ДЛЯ СВЯТА ============ -->
+    <section class="t-also" aria-labelledby="also-title">
+      <div class="wrap">
+        <h2 id="also-title">Ще для свята</h2>
+        <div class="together__cards">
+          <a class="tcard" href="santa.html">
+            <h3>Таємний Санта</h3>
+            <p>Впиши імена — і&nbsp;кожен отримає особисте посилання з&nbsp;тим, кому він дарує.</p>
+            <span class="tcard__go">Провести жеребкування<svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></span>
+            <img src="img/sleigh.webp" alt="" width="192" height="192" loading="lazy" decoding="async">
+          </a>
+          <a class="tcard" href="index.html">
+            <h3>Сніжок на&nbsp;робочий стіл</h3>
+            <p>Сніг лягає на&nbsp;вікна, а&nbsp;сніговик кличе тебе на&nbsp;ім'я. Для Windows і&nbsp;macOS, безкоштовно.</p>
+            <span class="tcard__go">Подивитися<svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></span>
+            <img src="img/snowman.webp" alt="" width="256" height="256" loading="lazy" decoding="async">
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <p class="foot__brand"><svg class="logo__flake" aria-hidden="true"><use href="#i-snow"/></svg>Сніжок. З&nbsp;наступаючим!</p>
+      <p>Сторінка не&nbsp;використовує cookies, аналітику та&nbsp;сервер. Чернетка списку зберігається лише в&nbsp;localStorage твого браузера, а&nbsp;надісланий список — у&nbsp;самому посиланні.</p>
+      <p class="sign" lang="en">Vibe coded by Ihor Hryhorenko</p>
+    </div>
+  </footer>
+
+  <canvas id="flakes" aria-hidden="true"></canvas>
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

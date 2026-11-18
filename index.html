@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Сніжок — сніг на робочому столі для Windows і macOS</title>
+  <meta name="description" content="Сніжок — новорічний застосунок для Windows і macOS: сніг лягає на вікна й кучугурами внизу екрана, гуляють сніговик, пінгвін і білочка, а сніговик кличе тебе на ім'я. Безкоштовно, без інтернету й стеження.">
+  <meta name="theme-color" content="#0B1530">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Сніжок — сніг іде просто на твоєму екрані">
+  <meta property="og:description" content="Новорічний застосунок для Windows і macOS. Сніговик, пінгвін і білочка на твоєму робочому столі.">
+  <meta property="og:url" content="https://wmedede1234.github.io/snizhok-site/">
+  <meta property="og:locale" content="uk_UA">
+  <meta property="og:image" content="https://wmedede1234.github.io/snizhok-site/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Сніжок: сніговик, пінгвін і білочка на заметі під місяцем, підпис «Сніг іде просто на твоєму екрані»">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/nunito-cyr.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/nunito-lat.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
+  <script src="main.js" defer></script>
+  <script src="fx.js" defer></script>
+</head>
+<body>
+  <!-- Іконки інтерфейсу: Lucide (ISC). Логотипи ОС — Simple Icons. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-snow" viewBox="0 0 24 24"><path d="M2 12h20M12 2v20m8-6-4-4 4-4M4 8l4 4-4 4M16 4l-4 4-4-4M8 20l4-4 4 4"/></symbol>
+      <symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+      <symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 3l14 9-14 9V3z"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-wifi-off" viewBox="0 0 24 24"><path d="M12 20h.01M8.5 16.43a5 5 0 0 1 7 0M5 12.86a10 10 0 0 1 5.17-2.69M19 12.86a10 10 0 0 0-2-1.52M2 8.82a15 15 0 0 1 4.18-2.64M22 8.82a15 15 0 0 0-11.29-3.76M2 2l20 20"/></symbol>
+      <symbol id="i-voice" viewBox="0 0 24 24"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6a1.4 1.4 0 0 1-1 .4H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.4a1.4 1.4 0 0 1 1 .4l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6M19.4 18.4a9 9 0 0 0 0-12.8"/></symbol>
+      <symbol id="i-drive" viewBox="0 0 24 24"><path d="M22 12H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><path d="M6 16h.01M10 16h.01"/></symbol>
+      <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4"/></symbol>
+      <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.14 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/></symbol>
+      <symbol id="i-party" viewBox="0 0 24 24"><path d="M5.8 11.3 2 22l10.7-3.79M4 3h.01M22 8h.01M15 2h.01M22 20h.01M22 2l-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10M22 13l-.82-.33c-.86-.34-1.82.2-1.98 1.11-.11.7-.72 1.22-1.43 1.22H17M11 2l.33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7"/><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+      <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+      <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></symbol>
+      <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 15V9M14 15V9"/></symbol>
+      <symbol id="i-apple" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.5-1-2.5-3.9ZM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4Z"/></symbol>
+      <symbol id="i-windows" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M3 5.5 10.4 4.5v7H3v-6Zm0 13 7.4 1v-7H3v6Zm8.4 1.1L21 21v-8.5h-9.6v7.1Zm0-15.2v7.1H21V3l-9.6 1.4Z"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip" href="#main">Перейти до вмісту</a>
+
+  <header class="top">
+    <div class="wrap top__in">
+      <a class="logo" href="#top" aria-label="Сніжок — на початок">
+        <svg class="logo__flake" aria-hidden="true"><use href="#i-snow"/></svg>Сніжок
+      </a>
+      <nav class="nav" aria-label="Розділи">
+        <a href="#how">Як це працює</a>
+        <a href="#residents">Мешканці</a>
+        <a href="#together">Разом</a>
+        <a href="#download">Завантажити</a>
+        <a href="#faq">Питання</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="moonbox" aria-hidden="true">
+        <div class="moon">
+          <span class="moon__disc"><i></i><i></i><i></i><i></i><i></i></span>
+        </div>
+      </div>
+      <div class="flight flight--sky" id="flight-sky" aria-hidden="true">
+        <img src="img/deer.webp" alt="" width="128" height="128" decoding="async"><img src="img/deer.webp" alt="" width="128" height="128" decoding="async"><img src="img/sleigh.webp" alt="" width="192" height="192" decoding="async">
+      </div>
+      <img class="hero__land" src="img/land.webp" alt="" width="2400" height="450" decoding="async" fetchpriority="low">
+      <div class="wrap hero__center">
+        <div class="snowy">
+          <h1 id="hero-title"><span>Сніг</span> <span>іде</span> <span>просто</span> <span>на&nbsp;твоєму</span> <span>екрані.</span></h1>
+          <canvas class="snowy__caps" aria-hidden="true"></canvas>
+        </div>
+        <p class="hero__lead">Новорічний застосунок для Windows і&nbsp;macOS.<span class="lead-full"> Сніг лягає на&nbsp;вікна, внизу гуляють сніговик, пінгвін і&nbsp;білочка, а&nbsp;коли ти&nbsp;відійдеш — сніговик покличе тебе на&nbsp;ім'я.</span><span class="lead-short"> Сніговик покличе тебе на&nbsp;ім'я.</span></p>
+        <div class="mob-cta">
+          <a class="btn btn--cta btn--lg" href="#name-form" data-try><svg class="ico" aria-hidden="true"><use href="#i-message"/></svg>Спробуй зі своїм імʼям</a>
+          <button class="btn btn--ghost btn--lg" type="button" data-share><svg class="ico" aria-hidden="true"><use href="#i-monitor"/></svg>Надіслати собі на компʼютер</button>
+          <a class="mob-dl" href="#download">Завантаження для компʼютера ↓</a>
+        </div>
+        <div class="hero__row">
+        <div class="hero__dl">
+        <div class="dl" data-dl-group>
+          <a class="btn btn--cta btn--lg" data-os="win" href="#download"><svg class="ico" aria-hidden="true"><use href="#i-windows"/></svg><span data-label>Завантажити для Windows</span></a>
+          <a class="btn btn--ghost btn--lg" data-os="mac" href="#download"><svg class="ico" aria-hidden="true"><use href="#i-apple"/></svg><span data-label>Завантажити для macOS</span></a>
+        </div>
+        <p class="small" data-dl-hint>Безкоштовно. Windows 10/11 і&nbsp;macOS 11 або новіша.</p>
+        </div>
+        <form class="name hero-name" id="name-form" autocomplete="off" novalidate>
+          <label class="name__label" for="user-name">Як тебе звати?</label>
+          <div class="name__row">
+            <input class="input" id="user-name" name="userName" type="text" maxlength="24" placeholder="Твоє ім'я" spellcheck="false" autocomplete="given-name" aria-describedby="name-help">
+            <button class="btn btn--ghost" type="submit">
+              <svg class="ico" aria-hidden="true"><use href="#i-message"/></svg>Привітатися
+            </button>
+          </div>
+          <p class="help" id="name-help" role="status" aria-live="polite">Сніговик у&nbsp;сцені нижче привітається з&nbsp;тобою. Ім'я лишається тільки в&nbsp;цьому браузері.</p>
+          <button class="linkbtn" type="button" id="call-toggle" hidden aria-expanded="false" aria-controls="call-wrap">
+            <svg class="ico ico--sm" aria-hidden="true"><use href="#i-plus"/></svg>Додати лагідне звертання
+          </button>
+          <div id="call-wrap" class="name__extra" hidden>
+            <label class="name__label" for="call-name">Як до тебе звертатися лагідно?</label>
+            <input class="input" id="call-name" name="callName" type="text" maxlength="24" placeholder="Необов'язково" spellcheck="false">
+          </div>
+          <p class="note" id="voice-note" hidden>
+            <svg class="ico ico--sm" aria-hidden="true"><use href="#i-info"/></svg>
+            <span>У&nbsp;цьому браузері немає українського голосу, тож сніговик відповідає бульбашкою. <a href="#faq-voice">Як додати голос</a></span>
+          </p>
+        </form>
+        </div>
+      </div>
+
+      <!-- Сцена: живий рушій поверх макета робочого столу. Сміливий елемент сторінки. -->
+      <div class="wrap">
+        <div class="stage" id="stage">
+          <div class="stage__bar" aria-hidden="true">
+            <span class="stage__dot"></span><span>Сніжок</span><span>Файл</span><span>Вигляд</span>
+            <span class="stage__clock" id="clock">00:00</span>
+          </div>
+          <div class="fwin fwin--todo" data-win="todo" aria-hidden="true">
+            <div class="fwin__title" data-drag><i></i><i></i><i></i><b>Справи до свята</b></div>
+            <ul class="fwin__body">
+              <li><span class="tick is-on"></span>Купити мандарини</li>
+              <li><span class="tick is-on"></span>Прикрасити ялинку</li>
+              <li><span class="tick"></span>Зліпити сніговика</li>
+              <li><span class="tick"></span>Загадати бажання</li>
+            </ul>
+          </div>
+          <div class="fwin fwin--count" data-win="count" aria-hidden="true">
+            <div class="fwin__title" data-drag><i></i><i></i><i></i><b>До Нового року</b></div>
+            <div class="fwin__count"><strong id="days">—</strong><span id="days-word">днів</span></div>
+          </div>
+          <canvas id="snow" aria-hidden="true"></canvas>
+          <button class="btn btn--cta stage__play" type="button" id="demo-play" hidden>
+            <svg class="ico" aria-hidden="true"><use href="#i-play"/></svg>Запустити сніг
+          </button>
+          <p class="sr-only">Жива демонстрація: на макеті робочого столу падає сніг, на вікнах лежать сніжні шапки, унизу гуляють персонажі.</p>
+        </div>
+        <div class="under">
+          <div class="tools" role="group" aria-label="Керування сценою">
+          <p class="tools__hint">Це не відео. Тягни вікна за&nbsp;заголовок, штовхай мандаринки, клацни сніговика.</p>
+          <div class="tools__btns">
+            <button class="chip" type="button" data-act="shake">Струсити вікна</button>
+            <button class="chip" type="button" data-act="snowmobile">Викликати снігохід</button>
+            <button class="chip" type="button" data-spawn="tangerine">Скинути мандаринку</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ЯК ЦЕ ПРАЦЮЄ ============ -->
+    <section class="how" id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <h2 id="how-title">Як це працює</h2>
+        <ol class="steps">
+          <li class="step">
+            <svg class="step__art" viewBox="0 0 160 100" aria-hidden="true"><rect x="22" y="30" width="116" height="62" rx="8" class="w"/><rect x="22" y="30" width="116" height="14" rx="7" class="wt"/><g class="f"><circle cx="40" cy="12" r="3"/><circle cx="70" cy="22" r="2.5"/><circle cx="104" cy="8" r="3.2"/><circle cx="128" cy="20" r="2.2"/><circle cx="56" cy="4" r="2"/><circle cx="90" cy="16" r="2"/><circle cx="30" cy="62" r="2.4"/><circle cx="146" cy="56" r="2.6"/></g></svg>
+            <h3>Сніг іде</h3>
+            <p>Легкий сніжок падає поверх усіх вікон. Кліки й&nbsp;клавіатура проходять крізь нього.</p>
+          </li>
+          <li class="step">
+            <svg class="step__art" viewBox="0 0 160 100" aria-hidden="true"><rect x="22" y="30" width="116" height="62" rx="8" class="w"/><rect x="22" y="30" width="116" height="14" rx="7" class="wt"/><path class="cap" d="M18 32c4-9 14-10 22-8 6-6 18-7 26-3 8-5 22-5 30 0 9-4 24-3 30 3 8-1 14 3 14 9-2 3-6 2-7 6-2 3-5 1-6-1-2 3-5 4-7 1H45c0 4-4 5-6 2-2 3-6 2-6-1-4 1-9 0-10-3-3 0-5-2-5-5z"/><g class="f"><circle cx="50" cy="10" r="2.6"/><circle cx="96" cy="6" r="3"/><circle cx="126" cy="14" r="2"/></g></svg>
+            <h3>Лягає на&nbsp;вікна</h3>
+            <p>На&nbsp;верхніх краях вікон росте сніжна шапка, а&nbsp;внизу екрана — кучугури.</p>
+          </li>
+          <li class="step">
+            <svg class="step__art" viewBox="0 0 160 100" aria-hidden="true"><g transform="rotate(-4 80 60)"><rect x="34" y="28" width="116" height="62" rx="8" class="w"/><rect x="34" y="28" width="116" height="14" rx="7" class="wt"/></g><g class="f2"><circle cx="30" cy="44" r="6"/><circle cx="20" cy="62" r="4.5"/><circle cx="34" cy="78" r="5"/><circle cx="16" cy="88" r="3.5"/></g><path d="M8 34c-3 0-6 2-6 5M10 26c-2-2-6-2-8 0" class="m"/></svg>
+            <h3>Посунь вікно — осиплеться</h3>
+            <p>Струсни вікно, і&nbsp;шапка впаде в&nbsp;кучугуру. <button class="linkbtn linkbtn--inline" type="button" data-act="shake" data-scroll>Спробувати в&nbsp;сцені</button></p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ МЕШКАНЦІ ============ -->
+    <section class="residents" id="residents" aria-labelledby="res-title">
+      <div class="wrap">
+        <div class="residents__head">
+          <h2 id="res-title">Хто живе в&nbsp;кучугурах</h2>
+          <p>Обʼємні персонажі з&nbsp;ходою, тінню та слідами на&nbsp;снігу. Покличи кого завгодно — зʼявиться в&nbsp;сцені вгорі.</p>
+        </div>
+        <ul class="cast">
+          <li class="who who--big">
+            <div class="who__art"><img src="img/snowman.webp" alt="Сніговик у капелюсі й синьому шарфі" width="256" height="256" loading="lazy" decoding="async"></div>
+            <h3>Сніговик</h3>
+            <p>Кличе тебе на&nbsp;ім'я. Клацни — розсиплеться й&nbsp;збереться.</p>
+            <button class="chip" type="button" data-spawn="snowman" data-scroll>Покликати сніговика</button>
+          </li>
+          <li class="who">
+            <div class="who__art"><img src="img/penguin.webp" alt="Пінгвін" width="256" height="256" loading="lazy" decoding="async" style="--s:.82"></div>
+            <h3>Пінгвін</h3>
+            <p>Ходить перевальцем. Клацни — проїдеться на&nbsp;животі.</p>
+            <button class="chip" type="button" data-spawn="penguin" data-scroll>Покликати пінгвіна</button>
+          </li>
+          <li class="who">
+            <div class="who__art"><img src="img/squirrel.webp" alt="Руда білочка з горішком" width="256" height="256" loading="lazy" decoding="async" style="--s:.8"></div>
+            <h3>Білочка</h3>
+            <p>Лякається швидкого курсора, але горішок з&nbsp;рук візьме.</p>
+            <button class="chip" type="button" data-spawn="squirrel" data-scroll>Покликати білочку</button>
+          </li>
+          <li class="who">
+            <div class="who__art who__art--pair"><img src="img/tangerine.webp" alt="Мандаринка з листочком" width="192" height="192" loading="lazy" decoding="async" style="--s:.5"><img src="img/tangerine-peeled.webp" alt="" width="192" height="192" loading="lazy" decoding="async" style="--s:.42"></div>
+            <h3>Мандаринки</h3>
+            <p>Падають з&nbsp;неба. Штовхни курсором або почисть клацанням.</p>
+            <button class="chip" type="button" data-spawn="tangerine" data-scroll>Скинути мандаринку</button>
+          </li>
+          <li class="who">
+            <div class="who__art who__art--pair"><img src="img/gift.webp" alt="Подарунок з бантом" width="128" height="128" loading="lazy" decoding="async" style="--s:.55"><img src="img/gift-blue.webp" alt="" width="128" height="128" loading="lazy" decoding="async" style="--s:.45"></div>
+            <h3>Подарунки</h3>
+            <p>Іноді губить Санта. Клацни — всередині сюрприз.</p>
+            <button class="chip" type="button" data-spawn="gift" data-scroll>Скинути подарунок</button>
+          </li>
+          <li class="who who--wide">
+            <div class="who__art who__art--wide"><img src="img/snowmobile.webp" alt="Червоний снігохід з плугом і водієм у шоломі" width="512" height="256" loading="lazy" decoding="async"></div>
+            <div class="who__txt">
+              <h3>Снігоходи</h3>
+              <p>Раз на&nbsp;30 або 60 хвилин розчищають кучугури, щоб сніг не&nbsp;закрив пів екрана. Перший — з&nbsp;плугом, з-під нього летить сніговий фонтан.</p>
+              <button class="chip" type="button" data-act="snowmobile" data-scroll>Викликати снігохід</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ СНІЖНА КУЛЯ ============ -->
+    <section class="globe-sec" id="globe-sec" aria-labelledby="globe-title">
+      <div class="wrap globe-sec__in">
+        <div class="globe-sec__txt">
+          <h2 id="globe-title">Потруси сніжну кулю</h2>
+          <p>Усередині — крихітний робочий стіл зі&nbsp;снігом. Потягни кулю мишею чи&nbsp;пальцем, і&nbsp;сніг здійметься та&nbsp;повільно осяде.</p>
+          <p class="globe-sec__hint" id="globe-hint">З&nbsp;клавіатури: перейди на&nbsp;кулю клавішею <kbd>Tab</kbd> і&nbsp;натисни <kbd>Enter</kbd> або <kbd>Пробіл</kbd>.</p>
+        </div>
+        <div class="globe-wrap">
+          <div class="globe" id="globe" role="button" tabindex="0" aria-label="Сніжна куля з робочим столом. Натисни Enter або Пробіл, щоб потрусити" aria-describedby="globe-hint" data-tex="img/globe-desk.webp">
+            <img class="globe__poster" src="img/globe-poster.webp" alt="" width="480" height="480" loading="lazy" decoding="async">
+            <canvas class="globe__cv" aria-hidden="true"></canvas>
+          </div>
+          <div class="globe__base" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ДРІБНИЦІ ============ -->
+    <section class="more" aria-labelledby="more-title">
+      <div class="wrap more__in">
+        <h2 id="more-title">І&nbsp;ще кілька дрібниць</h2>
+        <ul class="bits">
+          <li><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg><span>Гірлянда з&nbsp;глянцевих лампочок під рядком меню</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-sparkles"/></svg><span>Санта на&nbsp;санях пролітає небом і&nbsp;губить подарунки</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-party"/></svg><span>Дні до свята в&nbsp;треї, а&nbsp;опівночі — відлік і&nbsp;салют з&nbsp;твоїм ім'ям</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-moon"/></svg><span>Спокійний режим: менше руху, один персонаж за&nbsp;раз</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-monitor"/></svg><span>На&nbsp;кожному моніторі свій сніг</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-mic"/></svg><span>Свої фрази й&nbsp;записані голосові замість стандартних</span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-keyboard"/></svg><span>Сніжка в&nbsp;курсор: <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd> або <kbd>⌥</kbd><kbd>⌘</kbd><kbd>S</kbd></span></li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-pause"/></svg><span>Пауза на&nbsp;годину для ігор і&nbsp;презентацій</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ СВЯТО РАЗОМ ============ -->
+    <section class="together" id="together" aria-labelledby="tog-title">
+      <div class="wrap">
+        <div class="together__head">
+          <h2 id="tog-title">Свято — це&nbsp;разом</h2>
+          <p>Два маленькі інструменти для друзів, родини чи&nbsp;офісу. Працюють просто в&nbsp;браузері: без реєстрації, пошти й&nbsp;сервера.</p>
+        </div>
+        <div class="together__cards">
+          <a class="tcard" href="wishlist.html">
+            <h3>Список бажань</h3>
+            <p>Запиши, що хочеш отримати на&nbsp;Новий рік, і&nbsp;надішли друзям одним посиланням.</p>
+            <span class="tcard__go">Скласти список<svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></span>
+            <img src="img/gift.webp" alt="" width="128" height="128" loading="lazy" decoding="async">
+          </a>
+          <a class="tcard" href="santa.html">
+            <h3>Таємний Санта</h3>
+            <p>Впиши імена — і&nbsp;кожен отримає особисте посилання з&nbsp;тим, кому він дарує.</p>
+            <span class="tcard__go">Провести жеребкування<svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></span>
+            <img src="img/sleigh.webp" alt="" width="192" height="192" loading="lazy" decoding="async">
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ЗАВАНТАЖИТИ ============ -->
+    <section class="get" id="download" aria-labelledby="get-title">
+      <div class="wrap get__in">
+        <div class="get__main">
+          <h2 id="get-title">Завантаж Сніжок</h2>
+          <p class="get__lead" id="dl-note">Безкоштовно. Встановлення займає менше хвилини.</p>
+          <div class="dl" data-dl-group>
+            <a class="btn btn--cta btn--lg" data-os="win" href="#"><svg class="ico" aria-hidden="true"><use href="#i-windows"/></svg><span data-label>Завантажити для Windows</span></a>
+            <a class="btn btn--ghost btn--lg" data-os="mac" href="#"><svg class="ico" aria-hidden="true"><use href="#i-apple"/></svg><span data-label>Завантажити для macOS</span></a>
+          </div>
+          <dl class="reqs">
+            <div><dt>Windows</dt><dd>10 або 11, 64-біт, файл Snizhok-Setup.exe</dd></div>
+            <div><dt>macOS</dt><dd>11 Big Sur і новіші, Intel та Apple Silicon, файл Snizhok.dmg</dd></div>
+          </dl>
+          <p class="small">Збірки не підписані, тож система може перепитати. <a href="#faq">Як відкрити</a>. Попередні збірки — на <a id="dl-all" href="#">сторінці релізів</a>.</p>
+        </div>
+        <aside class="privacy" aria-labelledby="privacy-title">
+          <svg class="privacy__icon" aria-hidden="true"><use href="#i-shield"/></svg>
+          <h3 id="privacy-title">Без інтернету й&nbsp;стеження</h3>
+          <ul>
+            <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-wifi-off"/></svg>Жодних мережевих запитів: ні&nbsp;телеметрії, ні&nbsp;аналітики, ні&nbsp;автооновлень.</li>
+            <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-voice"/></svg>Говорить вбудованим голосом системи, без онлайн-сервісів.</li>
+            <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-drive"/></svg>Ім'я, фрази й&nbsp;голосові зберігаються лише на&nbsp;твоєму компʼютері.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="wrap faq__in">
+        <h2 id="faq-title">Питання</h2>
+        <div class="faq__list">
+          <details>
+            <summary>Windows пише «Windows захистив ваш ПК». Що робити?<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+            <div class="faq__a">
+              <p>Це фільтр SmartScreen: він попереджає про будь-які програми без платного цифрового підпису. Сніжок не&nbsp;підписаний, але безпечний і&nbsp;не&nbsp;ходить у&nbsp;мережу.</p>
+              <ol>
+                <li>У&nbsp;синьому вікні натисни <b>«Докладніше»</b>.</li>
+                <li>Натисни кнопку <b>«Усе одно запустити»</b>.</li>
+                <li>Далі звичайне встановлення. Більше питати не&nbsp;буде.</li>
+              </ol>
+            </div>
+          </details>
+          <details>
+            <summary>macOS пише «Неможливо перевірити розробника». Як відкрити?<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+            <div class="faq__a">
+              <p>Так Gatekeeper реагує на&nbsp;застосунки без нотаризації Apple.</p>
+              <ol>
+                <li>Перетягни Сніжок у&nbsp;папку <b>«Програми»</b>.</li>
+                <li>Клацни значок <b>правою кнопкою</b> (або з&nbsp;<kbd>Control</kbd>), вибери <b>«Відкрити»</b> і&nbsp;ще раз <b>«Відкрити»</b> у&nbsp;вікні.</li>
+                <li>Якщо кнопки немає: <b>Системні параметри → Приватність і&nbsp;безпека</b>, унизу біля повідомлення про Сніжок натисни <b>«Усе одно відкрити»</b> і&nbsp;підтверди паролем.</li>
+              </ol>
+              <p>Якщо macOS пише, що програма <b>«пошкоджена»</b>: відкрий Термінал, виконай <code>xattr -cr /Applications/Сніжок.app</code> і&nbsp;відкрий Сніжок знову.</p>
+            </div>
+          </details>
+          <details id="faq-voice">
+            <summary>Сніговик мовчить. Як додати голос?<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+            <div class="faq__a">
+              <p>Сніжок говорить системним українським голосом. Якщо його немає, сніговик показує лише бульбашку.</p>
+              <ul>
+                <li><b>Windows:</b> Параметри → Час і&nbsp;мова → Мовлення → «Додати голоси» → Українська.</li>
+                <li><b>macOS:</b> Системні параметри → Універсальний доступ → Озвучений вміст → Системний голос → Керувати голосами → Українська.</li>
+                <li>Або запиши власні голосові: меню Сніжка → «Папка для своїх голосових…».</li>
+              </ul>
+            </div>
+          </details>
+          <details>
+            <summary>Як змінити ім'я?<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+            <div class="faq__a"><p>Значок Сніжка в&nbsp;треї (Windows) або в&nbsp;рядку меню (macOS) → <b>«Змінити ім'я…»</b>. Там же можна задати лагідне звертання й&nbsp;послухати, як воно звучить.</p></div>
+          </details>
+          <details>
+            <summary>Чи не гальмуватиме компʼютер?<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+            <div class="faq__a"><p>Ні. Зазвичай Сніжок бере близько 5&nbsp;% одного ядра й&nbsp;до&nbsp;300&nbsp;МБ памʼяті. Для ігор і&nbsp;презентацій є&nbsp;<b>«Пауза на&nbsp;1 годину»</b>, тоді навантаження нульове.</p></div>
+          </details>
+          <details>
+            <summary>Як видалити?<svg class="ico" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+            <div class="faq__a">
+              <ul>
+                <li><b>Windows:</b> Параметри → Програми → Сніжок → Видалити.</li>
+                <li><b>macOS:</b> закрий Сніжок через рядок меню («Вийти») і&nbsp;перетягни його з&nbsp;«Програм» у&nbsp;Кошик.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ФІНАЛ ============ -->
+    <section class="end" aria-labelledby="end-title">
+      <div class="wrap end__in">
+        <div class="snowy">
+          <h2 id="end-title"><span>Хай</span> <span>сніжить.</span></h2>
+          <canvas class="snowy__caps" aria-hidden="true"></canvas>
+        </div>
+        <div class="dl" data-dl-group data-single>
+          <a class="btn btn--cta btn--lg" data-os="win" href="#"><svg class="ico" aria-hidden="true"><use href="#i-windows"/></svg><span data-label>Завантажити для Windows</span></a>
+          <a class="btn btn--ghost btn--lg" data-os="mac" href="#"><svg class="ico" aria-hidden="true"><use href="#i-apple"/></svg><span data-label>Завантажити для macOS</span></a>
+        </div>
+      </div>
+      <img class="end__peek end__peek--l" src="img/penguin.webp" alt="" aria-hidden="true" width="256" height="256" loading="lazy" decoding="async">
+      <img class="end__peek end__peek--r" src="img/squirrel.webp" alt="" aria-hidden="true" width="256" height="256" loading="lazy" decoding="async">
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <p class="foot__brand"><svg class="logo__flake" aria-hidden="true"><use href="#i-snow"/></svg>Сніжок. З&nbsp;наступаючим!</p>
+      <p>Персонажі: сніговик, пінгвін, олень і&nbsp;Санта — <a href="https://github.com/microsoft/fluentui-emoji" rel="noopener">Microsoft Fluent Emoji</a> (ліцензія <a href="https://github.com/microsoft/fluentui-emoji/blob/main/LICENSE" rel="noopener">MIT</a>, © Microsoft Corporation). Білочка, мандарини, подарунки, снігоходи, сани й&nbsp;лампочки — власні 3D-рендери проєкту (three.js, MIT). Іконки — <a href="https://lucide.dev" rel="noopener">Lucide</a> (ISC). Шрифт Nunito — SIL Open Font License.</p>
+      <p>Сайт не використовує cookies та аналітику. Ім'я з&nbsp;демо зберігається лише в&nbsp;localStorage твого браузера.</p>
+      <p class="foot__egg">Набери на&nbsp;клавіатурі слово «сніг» і&nbsp;подивись, що буде.</p>
+      <p class="sign" lang="en">Vibe coded by Ihor Hryhorenko</p>
+    </div>
+  </footer>
+
+  <canvas id="egg" aria-hidden="true"></canvas>
+  <canvas id="flakes" aria-hidden="true"></canvas>
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

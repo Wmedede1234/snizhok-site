@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Таємний Санта онлайн — жеребкування без реєстрації | Сніжок</title>
+  <meta name="description" content="Таємний Санта для друзів, родини чи офісу: впиши імена, проведи жеребкування й надішли кожному особисте посилання. Безкоштовно, без реєстрації та пошти.">
+  <meta name="theme-color" content="#0B1530">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="uk_UA">
+  <meta property="og:url" content="https://wmedede1234.github.io/snizhok-site/santa.html">
+  <meta property="og:title" content="Таємний Санта онлайн — жеребкування без реєстрації">
+  <meta property="og:description" content="Впиши імена, проведи жеребкування в браузері й надішли кожному особисте посилання. Безкоштовно, без реєстрації та пошти.">
+  <meta property="og:image" content="https://wmedede1234.github.io/snizhok-site/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Сніжок: сніговик, пінгвін і білочка на заметі під місяцем">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Таємний Санта онлайн — жеребкування без реєстрації">
+  <meta name="twitter:description" content="Впиши імена, проведи жеребкування в браузері й надішли кожному особисте посилання.">
+  <meta name="twitter:image" content="https://wmedede1234.github.io/snizhok-site/og.jpg">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/nunito-cyr.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/nunito-lat.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tools.css">
+  <script src="config.js"></script>
+  <script src="tools.js" defer></script>
+  <script src="santa.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Перейти до вмісту</a>
+
+  <header class="top">
+    <div class="wrap top__in">
+      <a class="logo" href="index.html" aria-label="Сніжок — на головну">
+        <svg class="logo__flake" aria-hidden="true"><use href="#i-snow"/></svg>Сніжок
+      </a>
+      <nav class="nav" aria-label="Розділи">
+        <a href="wishlist.html">Список бажань</a>
+        <a href="santa.html" aria-current="page">Таємний Санта</a>
+        <a href="index.html#download">Завантажити Сніжок</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ ОРГАНІЗАТОР ============ -->
+    <div id="ss-org" hidden>
+      <section class="t-hero">
+        <div class="wrap">
+          <p class="t-kicker">Для свята разом</p>
+          <h1>Таємний Санта</h1>
+          <p class="t-lead">Впиши імена — жеребкування пройде просто у&nbsp;твоєму браузері. Кожен отримає особисте посилання з&nbsp;тим, кому він дарує. Без реєстрації та&nbsp;пошти.</p>
+        </div>
+      </section>
+
+      <section class="t-body" aria-label="Жеребкування">
+        <div class="wrap t-santa-max">
+          <ol class="t-steps" id="ss-steps" aria-label="Кроки">
+            <li data-step="1">Учасники</li>
+            <li data-step="2">Жеребкування</li>
+            <li data-step="3">Розіслати посилання</li>
+          </ol>
+
+          <!-- Крок 1 -->
+          <form class="t-panel" id="ss-form" novalidate autocomplete="off">
+            <div class="t-summary" id="ss-summary" role="alert" tabindex="-1" hidden>
+              <h3 id="ss-summary-title">Є що виправити</h3>
+              <ul id="ss-summary-list"></ul>
+            </div>
+
+            <h2 class="t-h">Про гру</h2>
+            <div class="t-fields t-fields--3">
+              <div class="t-field">
+                <label for="ss-event">Назва <span class="t-opt">необов'язково</span></label>
+                <input class="input" id="ss-event" maxlength="50" placeholder="Таємний Санта нашого офісу">
+              </div>
+              <div class="t-field">
+                <label for="ss-budget">Бюджет <span class="t-opt">необов'язково</span></label>
+                <input class="input" id="ss-budget" maxlength="30" placeholder="до 500 грн">
+              </div>
+              <div class="t-field">
+                <label for="ss-date">Коли обмін <span class="t-opt">необов'язково</span></label>
+                <input class="input" id="ss-date" type="date">
+              </div>
+              <div class="t-field t-field--wide">
+                <label for="ss-note">Слово від організатора <span class="t-opt">необов'язково, побачать усі</span></label>
+                <input class="input" id="ss-note" maxlength="140" placeholder="Подарунки кладемо під ялинку до 18:00">
+              </div>
+            </div>
+
+            <h2 class="t-h" id="ss-people-title">Учасники</h2>
+            <p class="t-sub">Щонайменше троє. Якщо хтось уже склав <a href="wishlist.html">список бажань</a>, встав посилання поруч з&nbsp;ім'ям — його отримає той, хто дарує.</p>
+            <ol class="t-people" id="ss-people" aria-labelledby="ss-people-title"></ol>
+            <button type="button" class="btn btn--ghost t-add" id="ss-add"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg>Додати учасника</button>
+            <p class="t-count" id="ss-count" aria-live="polite"></p>
+
+            <div class="t-share__btns">
+              <button type="submit" class="btn btn--cta btn--lg" id="ss-draw"><svg class="ico" aria-hidden="true"><use href="#i-gift"/></svg>Провести жеребкування</button>
+            </div>
+            <ul class="t-notes">
+              <li><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg><span>Імена нікуди не&nbsp;надсилаються: сервера немає. Результат зберігається лише у&nbsp;твоєму браузері та&nbsp;в&nbsp;особистих посиланнях.</span></li>
+            </ul>
+          </form>
+
+          <!-- Крок 3 -->
+          <div class="t-panel" id="ss-result" hidden>
+            <h2 class="t-h" id="ss-result-title" tabindex="-1">Готово! Розішли посилання</h2>
+            <p class="t-sub">Надішли кожному <b>його</b> посилання в&nbsp;особисті повідомлення. Хто кому дарує, тут не&nbsp;показано — тож можеш грати й&nbsp;сам.</p>
+            <p class="t-progress" id="ss-progress" aria-live="polite"></p>
+            <ol class="t-links" id="ss-links"></ol>
+            <ul class="t-notes">
+              <li><svg class="ico" aria-hidden="true"><use href="#i-info"/></svg><span>Не&nbsp;відкривай чужі посилання — зіпсуєш собі сюрприз. Сторінку можна закрити: список посилань збережеться в&nbsp;цьому браузері.</span></li>
+              <li><svg class="ico" aria-hidden="true"><use href="#i-info"/></svg><span>Посилання стиснене, але не&nbsp;зашифроване, тож його бачить кожен, у&nbsp;кого воно є. Надсилай людині лише її посилання й&nbsp;краще в&nbsp;особисті повідомлення, а&nbsp;не&nbsp;в&nbsp;загальний чат.</span></li>
+            </ul>
+            <div class="t-rowbtns">
+              <button type="button" class="linkbtn" id="ss-redraw"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-refresh"/></svg>Перетягнути заново</button>
+              <button type="button" class="linkbtn" id="ss-edit">Змінити учасників</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ УЧАСНИК ============ -->
+    <section class="wrap" id="ss-me" hidden aria-labelledby="ss-me-title">
+      <div class="reveal">
+        <p class="t-kicker" id="ss-me-event"></p>
+        <h1 id="ss-me-title"></h1>
+        <p class="reveal__lead" id="ss-me-lead">Ти в&nbsp;грі. Переконайся, що ніхто не&nbsp;підглядає, і&nbsp;відкрий подарунок.</p>
+
+        <div class="reveal__card">
+          <button type="button" class="reveal__gift" id="ss-open">
+            <svg viewBox="0 0 220 220" width="210" height="210" aria-hidden="true" class="reveal__box">
+              <defs>
+                <linearGradient id="gb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2574B"/><stop offset="1" stop-color="#B92C2A"/></linearGradient>
+                <linearGradient id="gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF7466"/><stop offset="1" stop-color="#D23C36"/></linearGradient>
+                <linearGradient id="gr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFBEC"/><stop offset="1" stop-color="#F2DFA6"/></linearGradient>
+              </defs>
+              <ellipse cx="110" cy="204" rx="78" ry="10" fill="#060D22" opacity=".45"/>
+              <rect x="38" y="96" width="144" height="104" rx="10" fill="url(#gb)"/>
+              <rect x="96" y="96" width="28" height="104" fill="url(#gr)"/>
+              <rect x="38" y="96" width="144" height="16" fill="#7E1B1C" opacity=".35"/>
+              <g class="reveal__lid">
+                <rect x="28" y="66" width="164" height="38" rx="9" fill="url(#gl)"/>
+                <rect x="94" y="66" width="32" height="38" fill="url(#gr)"/>
+                <path d="M110 66c-10-26-44-34-48-16-3 14 22 18 48 16Zm0 0c10-26 44-34 48-16 3 14-22 18-48 16Z" fill="url(#gr)" stroke="#D9BE72" stroke-width="2"/>
+                <circle cx="110" cy="64" r="9" fill="#F2DFA6" stroke="#D9BE72" stroke-width="2"/>
+                <path d="M30 70q14-14 30-4 16-12 30-2 18-12 34 0 16-10 30 2 14-8 36 4v6H30Z" fill="#fff"/>
+              </g>
+            </svg>
+            <span class="reveal__hint">Відкрити, кому я&nbsp;дарую</span>
+          </button>
+
+          <div id="ss-out" hidden>
+            <div class="reveal__out">
+              <p class="reveal__label">Ти даруєш подарунок для</p>
+              <p class="reveal__name" id="ss-me-name"></p>
+            </div>
+            <dl class="reveal__facts" id="ss-me-facts"></dl>
+            <div class="reveal__acts" id="ss-me-acts"></div>
+            <button type="button" class="linkbtn reveal__hide" id="ss-hide">Сховати ім'я</button>
+          </div>
+          <p class="sr-only" id="ss-live" role="status" aria-live="polite"></p>
+        </div>
+
+        <div class="reveal__next">
+          <p>Допоможи своєму Санті: склади список бажань і&nbsp;надішли організатору.</p>
+          <div class="reveal__acts">
+            <a class="btn btn--ghost" href="wishlist.html"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg>Скласти список бажань</a>
+            <a class="btn btn--ghost" href="index.html"><svg class="ico" aria-hidden="true"><use href="#i-snow"/></svg>Сніг на&nbsp;робочий стіл</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ПОШКОДЖЕНЕ ПОСИЛАННЯ ============ -->
+    <section class="wrap t-state" id="ss-bad" hidden>
+      <h1>Посилання пошкоджене</h1>
+      <p>Схоже, воно обрізалося під час копіювання. Попроси організатора надіслати нове.</p>
+      <div class="t-state__btns">
+        <a class="btn btn--cta" href="index.html">На головну</a>
+        <a class="btn btn--ghost" href="santa.html">Провести свою гру</a>
+      </div>
+    </section>
+
+    <!-- ============ ЩЕ ДЛЯ СВЯТА ============ -->
+    <section class="t-also" id="ss-also" aria-labelledby="also-title">
+      <div class="wrap">
+        <h2 id="also-title">Ще для свята</h2>
+        <div class="together__cards">
+          <a class="tcard" href="wishlist.html">
+            <h3>Список бажань</h3>
+            <p>Запиши, що хочеш отримати, і&nbsp;надішли друзям одним посиланням.</p>
+            <span class="tcard__go">Скласти список<svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></span>
+            <img src="img/gift.webp" alt="" width="128" height="128" loading="lazy" decoding="async">
+          </a>
+          <a class="tcard" href="index.html">
+            <h3>Сніжок на&nbsp;робочий стіл</h3>
+            <p>Сніг лягає на&nbsp;вікна, а&nbsp;сніговик кличе тебе на&nbsp;ім'я. Для Windows і&nbsp;macOS, безкоштовно.</p>
+            <span class="tcard__go">Подивитися<svg class="ico" aria-hidden="true"><use href="#i-right"/></svg></span>
+            <img src="img/snowman.webp" alt="" width="256" height="256" loading="lazy" decoding="async">
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <p class="foot__brand"><svg class="logo__flake" aria-hidden="true"><use href="#i-snow"/></svg>Сніжок. З&nbsp;наступаючим!</p>
+      <p>Сторінка не&nbsp;використовує cookies, аналітику та&nbsp;сервер. Жеребкування відбувається у&nbsp;твоєму браузері; результат зберігається в&nbsp;localStorage організатора та&nbsp;в&nbsp;особистих посиланнях.</p>
+      <p class="sign" lang="en">Vibe coded by Ihor Hryhorenko</p>
+    </div>
+  </footer>
+
+  <canvas id="flakes" aria-hidden="true"></canvas>
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
